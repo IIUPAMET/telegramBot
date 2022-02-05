@@ -34,6 +34,7 @@ public class TelegramBot extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
+        setAnswer(update.getMessage().getChatId(), "hi", update.getMessage().getText());
         logger.debug("new Update received");
     }
 
@@ -62,16 +63,9 @@ public class TelegramBot extends TelegramLongPollingCommandBot {
      * @param text     текст ответа
      */
     private void setAnswer(Long chatId, String userName, String text) {
-        InlineKeyboardMarkup keyboardMarkup = new InlineKeyboardMarkup();
-        keyboardMarkup.setKeyboard(List.of(
-                List.of(
-                        new InlineKeyboardButton("eng"),
-                        new InlineKeyboardButton("ger")),
-                List.of(new InlineKeyboardButton("spa"))));
         SendMessage answer = new SendMessage();
         answer.setText(text);
         answer.setChatId(chatId.toString());
-        answer.setReplyMarkup(keyboardMarkup);
 
         try {
             execute(answer);

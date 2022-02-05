@@ -11,6 +11,7 @@ public class ApplicationTelegramBot {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new TelegramBot());
+            System.out.println("bot created");
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
